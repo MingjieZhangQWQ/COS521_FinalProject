@@ -8,7 +8,7 @@ It implements and reproduces all experiments on:
 - **Sec. 5.3**: Robustness to depolarizing noise  
 - **Sec. 6**: A constraint-satisfaction application to a 2×2 binary Sudoku puzzle  
 
-All simulations are implemented in **Python + Qiskit** on noiseless and noisy simulators.
+All simulations are implemented in **Python* on noiseless and noisy simulators.
 
 ---
 
@@ -27,7 +27,7 @@ All simulations are implemented in **Python + Qiskit** on noiseless and noisy si
   The script has two parts:
   - **Left panel**: compares convergence for $M \in \{1,4,16\}$ at fixed $n = 10$  
     and shows that more marked items lead to faster convergence.
-  - **Right panel**: runs Grover at $t_{\mathrm{opt}}$ for $k = 4$ and plots the  
+  - **Right panel**: runs Grover at $t_{\mathrm{opt}}$ for $M = 4$ and plots the  
     empirical distribution over all marked solutions, demonstrating almost uniform sampling.  
   Output figure: **`grover_multisol_combined.pdf`**.
 
