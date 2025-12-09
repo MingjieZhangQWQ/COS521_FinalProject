@@ -32,7 +32,7 @@ All simulations are implemented in **Python** on noiseless and noisy simulators.
   Output figure: **`grover_multisol_combined.pdf`**.
 
 - **Section 5.3 – Noise Robustness Analysis**  
-  Implemented in `grover_noise_robustness.py`.  
+  Implemented in `robustcheck.py`.  
   The script:
   - Fixes a single-solution instance with $n = 7$ (so $N = 128$);
   - Runs Grover’s algorithm at the theoretical optimal iteration $t_{\mathrm{opt}}$;
