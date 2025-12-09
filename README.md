@@ -66,5 +66,4 @@ All simulations are implemented in **Python + Qiskit** on noiseless and noisy si
 ├── grover_noise_robustness.pdf    # Figure for Sec 5.3
 ├── sudoku.py                      # Sec 6: 2×2 binary Sudoku oracle + Grover search
 ├── sudoku_solutions.pdf           # Figure for Sec 6
-├── counting.py                    # (Optional) auxiliary script for quantum counting
 └── README.md
