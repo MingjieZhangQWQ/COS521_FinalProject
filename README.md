@@ -3,7 +3,7 @@
 This repository contains the full implementation of the experimental components (Sections 5 and 6) from our COS 521 final report *“Grover’s Algorithm and Quantum Search.”*  
 It includes numerical simulations of Grover’s algorithm under different settings and a practical application to solving a binary Sudoku constraint satisfaction problem.
 
-All experiments were implemented using Python and Qiskit.
+All experiments were implemented using Python.
 
 ---
 
