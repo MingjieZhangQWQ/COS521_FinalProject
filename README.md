@@ -8,7 +8,7 @@ It implements and reproduces all experiments on:
 - **Sec. 5.3**: Robustness to depolarizing noise  
 - **Sec. 6**: A constraint-satisfaction application to a 2×2 binary Sudoku puzzle  
 
-All simulations are implemented in **Python* on noiseless and noisy simulators.
+All simulations are implemented in **Python** on noiseless and noisy simulators.
 
 ---
 
