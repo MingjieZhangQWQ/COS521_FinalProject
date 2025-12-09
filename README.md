@@ -4,7 +4,7 @@ This repository contains the code for **Sections 5 and 6** of my COS 521 final p
 It implements and reproduces all experiments on:
 
 - **Sec. 5.1**: Single-solution Grover search and complexity scaling  
-- **Sec. 5.2**: Multi-solution Grover search ($k > 1$)  
+- **Sec. 5.2**: Multi-solution Grover search ($M > 1$)  
 - **Sec. 5.3**: Robustness to depolarizing noise  
 - **Sec. 6**: A constraint-satisfaction application to a 2×2 binary Sudoku puzzle  
 
@@ -14,7 +14,7 @@ All simulations are implemented in **Python + Qiskit** on noiseless and noisy si
 
 ## Relation to the Report
 
-- **Section 5.1 – Single-Solution Grover Search ($k = 1$)**  
+- **Section 5.1 – Single-Solution Grover Search ($M = 1$)**  
   Implemented in `grover_unisol.py`.  
   The script:
   - Simulates Grover’s algorithm for different problem sizes $n \in \{4,6,8\}$;
@@ -22,10 +22,10 @@ All simulations are implemented in **Python + Qiskit** on noiseless and noisy si
   - Verifies that the optimal iteration scales as $t_{\mathrm{opt}} \approx \frac{\pi}{4}\sqrt{N}$ by plotting $t_{\mathrm{opt}}$ against $\sqrt{N}$.  
   Output figure: **`grover_unisol_comparison.pdf`**.
 
-- **Section 5.2 – Multi-Solution Grover Search ($k > 1$)**  
+- **Section 5.2 – Multi-Solution Grover Search ($M > 1$)**  
   Implemented in `grover_multisol.py`.  
   The script has two parts:
-  - **Left panel**: compares convergence for $k \in \{1,4,16\}$ at fixed $n = 10$  
+  - **Left panel**: compares convergence for $M \in \{1,4,16\}$ at fixed $n = 10$  
     and shows that more marked items lead to faster convergence.
   - **Right panel**: runs Grover at $t_{\mathrm{opt}}$ for $k = 4$ and plots the  
     empirical distribution over all marked solutions, demonstrating almost uniform sampling.  
@@ -48,7 +48,7 @@ All simulations are implemented in **Python + Qiskit** on noiseless and noisy si
   - Builds a **compute–check–uncompute** oracle: clause qubits store XOR results,  
     a multi-controlled phase-flip is applied when all constraints are satisfied, and then the  
     clause qubits are uncomputed back to $\lvert 0\rangle$;
-  - Runs two Grover iterations (near the optimal value for $N=16, k=2$);
+  - Runs two Grover iterations (near the optimal value for $N=16, M=2$);
   - Measures the variable qubits and visualizes the two valid Sudoku grids as 2×2 images with their probabilities.  
   Output figure: **`sudoku_solutions.pdf`**.
 
