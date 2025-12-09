@@ -1,81 +1,70 @@
-# Grover Algorithm Experiments — Simulation & Applications
+# Grover’s Algorithm – Simulation and Applications (COS 521 Project Code)
 
-This repository contains the full implementation of the experimental components (Sections 5 and 6) from our COS 521 final report *“Grover’s Algorithm and Quantum Search.”*  
-It includes numerical simulations of Grover’s algorithm under different settings and a practical application to solving a binary Sudoku constraint satisfaction problem.
+This repository contains the code for **Sections 5 and 6** of my COS 521 final project report on Grover’s algorithm.  
+It implements and reproduces all experiments on:
 
-All experiments were implemented using Python.
+- **Sec. 5.1**: Single-solution Grover search and complexity scaling  
+- **Sec. 5.2**: Multi-solution Grover search ($k > 1$)  
+- **Sec. 5.3**: Robustness to depolarizing noise  
+- **Sec. 6**: A constraint-satisfaction application to a 2×2 binary Sudoku puzzle  
 
----
-
-## 📌 Contents Overview
-
-This project contains four major experiment modules, directly corresponding to Sections **5.1–5.3** and **Section 6** of the report.
-
-### **1. Single-Solution Grover Search (k = 1)**
-Implements Grover’s algorithm for the case of a unique marked item (M = 1).  
-Experiments validate:
-
-- sinusoidal amplitude amplification  
-- optimal iteration count $ t_{\text{opt}} \approx \frac{\pi}{4}\sqrt{N} $ 
-- over-rotation effect when iterating past the optimal step  
-- linear scaling of $ t_{\text{opt}} $ vs. $ \sqrt{N} $, confirming the $O(\sqrt{N})$ query complexity  
-
-**Related script:** `grover_unik.py`  
-**Figures generated:** probability dynamics, complexity scaling plots.
+All simulations are implemented in **Python + Qiskit** on noiseless and noisy simulators.
 
 ---
 
-### **2. Multi-Solution Grover Search (k > 1)**
-Extends the experiments to multiple marked items.  
-Simulations reproduce the theoretical scaling:
+## Relation to the Report
 
-\[
-t_{\text{opt}} \approx \frac{\pi}{4}\sqrt{N/M}.
-\]
+- **Section 5.1 – Single-Solution Grover Search ($k = 1$)**  
+  Implemented in `grover_unisol.py`.  
+  The script:
+  - Simulates Grover’s algorithm for different problem sizes $n \in \{4,6,8\}$;
+  - Plots the success probability as a function of the number of iterations $t$;
+  - Verifies that the optimal iteration scales as $t_{\mathrm{opt}} \approx \frac{\pi}{4}\sqrt{N}$ by plotting $t_{\mathrm{opt}}$ against $\sqrt{N}$.  
+  Output figure: **`grover_unisol_comparison.pdf`**.
 
-Observed behaviors include:
+- **Section 5.2 – Multi-Solution Grover Search ($k > 1$)**  
+  Implemented in `grover_multisol.py`.  
+  The script has two parts:
+  - **Left panel**: compares convergence for $k \in \{1,4,16\}$ at fixed $n = 10$  
+    and shows that more marked items lead to faster convergence.
+  - **Right panel**: runs Grover at $t_{\mathrm{opt}}$ for $k = 4$ and plots the  
+    empirical distribution over all marked solutions, demonstrating almost uniform sampling.  
+  Output figure: **`grover_multisol_combined.pdf`**.
 
-- faster convergence as M increases  
-- shortening of oscillation period  
-- uniform sampling across all marked states  
+- **Section 5.3 – Noise Robustness Analysis**  
+  Implemented in `grover_noise_robustness.py`.  
+  The script:
+  - Fixes a single-solution instance with $n = 7$ (so $N = 128$);
+  - Runs Grover’s algorithm at the theoretical optimal iteration $t_{\mathrm{opt}}$;
+  - Adds depolarizing noise with varying gate error probability $p$ to both 1-qubit and 2-qubit gates;
+  - Plots the success probability versus $p$, together with the classical random-guess baseline $1/N$.  
+  Output figure: **`grover_noise_robustness.pdf`**.
 
-**Related scripts:** `grover_multik.py`, `grover_multisol_combined.py`  
-**Figures generated:** multi-k probability curves, distribution histograms.
-
----
-
-### **3. Noise Robustness Analysis**
-Evaluates Grover’s sensitivity to depolarizing noise on all gates.
-
-Key experimental findings include:
-
-- exponential decay of success probability in noisy circuits  
-- meaningful quantum advantage only when per-gate error rate \(p < 0.0015\)  
-- demonstration of NISQ limitations due to circuit depth of oracle + diffusion operators  
-
-**Related script:** `grover_noise_robustness.py`  
-**Figure generated:** success probability vs. depolarizing noise level.
-
----
-
-### **4. Application: Solving a 2×2 Binary Sudoku**
-Implements Grover’s algorithm for a genuine constraint-satisfaction problem (CSP).  
-A compute–check–uncompute oracle is built using:
-
-- XOR checks for row/column constraints  
-- auxiliary scratch qubits  
-- multi-controlled Toffoli (MCX) gate for phase kickback  
-
-The algorithm correctly identifies the two valid Sudoku grids:
-
-- |1001⟩  
-- |0110⟩  
-
-Achieving a combined probability > 93% after only 2 Grover iterations.
-
-**Related script:** `sudoku_solutions.py`  
-**Figure generated:** measurement histogram of valid Sudoku solutions.
+- **Section 6 – Application to 2×2 Binary Sudoku**  
+  Implemented in `sudoku.py`.  
+  The script:
+  - Encodes a 2×2 binary Sudoku with variables $v_0, v_1, v_2, v_3$ and four XOR constraints  
+    (two rows and two columns require unequal bits);
+  - Builds a **compute–check–uncompute** oracle: clause qubits store XOR results,  
+    a multi-controlled phase-flip is applied when all constraints are satisfied, and then the  
+    clause qubits are uncomputed back to $\lvert 0\rangle$;
+  - Runs two Grover iterations (near the optimal value for $N=16, k=2$);
+  - Measures the variable qubits and visualizes the two valid Sudoku grids as 2×2 images with their probabilities.  
+  Output figure: **`sudoku_solutions.pdf`**.
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
+
+```text
+.
+├── grover_unisol.py               # Sec 5.1: single-solution Grover + scaling plot
+├── grover_unisol_comparison.pdf   # Figure for Sec 5.1
+├── grover_multisol.py             # Sec 5.2: multi-solution Grover experiments
+├── grover_multisol_combined.pdf   # Figure for Sec 5.2
+├── grover_noise_robustness.py     # Sec 5.3: depolarizing-noise robustness
+├── grover_noise_robustness.pdf    # Figure for Sec 5.3
+├── sudoku.py                      # Sec 6: 2×2 binary Sudoku oracle + Grover search
+├── sudoku_solutions.pdf           # Figure for Sec 6
+├── counting.py                    # (Optional) auxiliary script for quantum counting
+└── README.md
