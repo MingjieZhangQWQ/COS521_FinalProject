@@ -16,9 +16,9 @@ Implements Grover’s algorithm for the case of a unique marked item (M = 1).
 Experiments validate:
 
 - sinusoidal amplitude amplification  
-- optimal iteration count \( t_{\text{opt}} \approx \frac{\pi}{4}\sqrt{N} \)  
+- optimal iteration count $ t_{\text{opt}} \approx \frac{\pi}{4}\sqrt{N} $ 
 - over-rotation effect when iterating past the optimal step  
-- linear scaling of \( t_{\text{opt}} \) vs. \( \sqrt{N} \), confirming the \(O(\sqrt{N})\) query complexity  
+- linear scaling of $ t_{\text{opt}} $ vs. $ \sqrt{N} $, confirming the $O(\sqrt{N})$ query complexity  
 
 **Related script:** `grover_unik.py`  
 **Figures generated:** probability dynamics, complexity scaling plots.
