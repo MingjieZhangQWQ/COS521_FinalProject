@@ -186,7 +186,7 @@ def plot_combined_multi_solution():
     
     # Add a horizontal line for Noise Level (to show contrast)
     # Usually noise is very close to 0, but good to visualize scale
-    ax2.axhline(y=noise_freq, color="gray", linestyle="--", linewidth=1, label="Avg Noise Level")
+    # ax2.axhline(y=noise_freq, color="gray", linestyle="--", linewidth=1, label="Avg Noise Level")
     
     # Add values on top of bars
     for bar in bars:
@@ -200,7 +200,7 @@ def plot_combined_multi_solution():
     ax2.set_xticks(x_pos)
     ax2.set_xticklabels(labels)
     ax2.set_ylim(0, max(freqs)*1.2) # Give some headroom
-    ax2.legend(frameon=False)
+    # ax2.legend(frameon=False)
     ax2.spines['top'].set_visible(False)
     ax2.spines['right'].set_visible(False)
 
